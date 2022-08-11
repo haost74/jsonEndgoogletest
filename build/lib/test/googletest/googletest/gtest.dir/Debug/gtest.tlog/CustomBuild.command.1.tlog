@@ -1,0 +1,10 @@
+^C:\USERS\RCIF7\ONEDRIVE\РАБОЧИЙ СТОЛ\C++\WJ\LIB\TEST\GOOGLETEST\GOOGLETEST\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/rcif7/OneDrive/Рабочий стол/C++/wj" "-BC:/Users/rcif7/OneDrive/Рабочий стол/C++/wj/build" --check-stamp-file "C:/Users/rcif7/OneDrive/Рабочий стол/C++/wj/build/lib/test/googletest/googletest/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

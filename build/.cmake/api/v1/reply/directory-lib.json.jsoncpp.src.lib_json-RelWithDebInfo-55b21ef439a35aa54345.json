@@ -1,0 +1,93 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install"
+		],
+		"files" : 
+		[
+			"lib/json/jsoncpp/src/lib_json/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 202,
+				"parent" : 0
+			}
+		]
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "lib",
+			"paths" : 
+			[
+				"lib/RelWithDebInfo/jsoncpp.lib"
+			],
+			"targetId" : "jsoncpp_lib::@325490665cffdd3565bb",
+			"targetIndex" : 11,
+			"targetIsImportLibrary" : true,
+			"type" : "target"
+		},
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "bin",
+			"paths" : 
+			[
+				"bin/RelWithDebInfo/jsoncpp.dll"
+			],
+			"targetId" : "jsoncpp_lib::@325490665cffdd3565bb",
+			"targetIndex" : 11,
+			"type" : "target"
+		},
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "lib",
+			"paths" : 
+			[
+				"lib/RelWithDebInfo/jsoncpp_static.lib"
+			],
+			"targetId" : "jsoncpp_static::@325490665cffdd3565bb",
+			"targetIndex" : 13,
+			"type" : "target"
+		},
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "lib",
+			"paths" : 
+			[
+				{
+					"from" : "lib/json/jsoncpp/src/lib_json/jsoncpp_object.dir/RelWithDebInfo//json_reader.obj",
+					"to" : "objects-RelWithDebInfo/jsoncpp_object/json_reader.obj"
+				},
+				{
+					"from" : "lib/json/jsoncpp/src/lib_json/jsoncpp_object.dir/RelWithDebInfo//json_value.obj",
+					"to" : "objects-RelWithDebInfo/jsoncpp_object/json_value.obj"
+				},
+				{
+					"from" : "lib/json/jsoncpp/src/lib_json/jsoncpp_object.dir/RelWithDebInfo//json_writer.obj",
+					"to" : "objects-RelWithDebInfo/jsoncpp_object/json_writer.obj"
+				}
+			],
+			"targetId" : "jsoncpp_object::@325490665cffdd3565bb",
+			"targetIndex" : 12,
+			"type" : "target"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "lib/json/jsoncpp/src/lib_json",
+		"source" : "lib/json/jsoncpp/src/lib_json"
+	}
+}
