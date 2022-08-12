@@ -8,6 +8,8 @@
 using std::string;
 using std::cout;
 
+//  test-netconnection 192.168.224.211 -port 8887  
+
 int main(int argc, char** argv)
 {
 
@@ -20,8 +22,8 @@ int main(int argc, char** argv)
     // std::cout << root << "\n";
 
     std::thread th([](){
-        string address = "172.0.0.1";
-        serverAsync::server sr(std::move(address), 8887);
+        string address = "192.168.224.211";
+        serverAsync::server sr(std::move(address), "8887");
     });
 
     th.join();

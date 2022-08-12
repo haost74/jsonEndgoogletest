@@ -25,7 +25,7 @@ namespace serverAsync
     {
         private:
             const string address;
-            const unsigned port;
+            const string port;
 
             WSADATA wsaData;
             int iResult;
@@ -40,7 +40,7 @@ namespace serverAsync
             struct addrinfo hints;
 
         public:
-            server(string&& address, const int port);
+            server(string&& address, string&& port);
             ~server();
     };
 }

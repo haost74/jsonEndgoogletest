@@ -2,7 +2,7 @@
 
 namespace serverAsync
 {
-    server::server(string&& address, const int port) 
+    server::server(string&& address, string&& port) 
     : address(address), port(port) 
     {
         // Initialize Winsock
@@ -18,7 +18,7 @@ namespace serverAsync
         hints.ai_flags = AI_PASSIVE;
 
          // Resolve the server address and port
-        iResult = getaddrinfo(NULL, DEFAULT_PORT, &hints, &result);
+        iResult = getaddrinfo(NULL, port.c_str(), &hints, &result);
         if ( iResult != 0 ) {
             printf("getaddrinfo failed with error: %d\n", iResult);
             WSACleanup();
@@ -50,6 +50,7 @@ namespace serverAsync
             WSACleanup();
         }
 
+
         // Accept a client socket
         ClientSocket = accept(ListenSocket, NULL, NULL);
         if (ClientSocket == INVALID_SOCKET) {
@@ -57,6 +58,7 @@ namespace serverAsync
             closesocket(ListenSocket);
             WSACleanup();
         }
+        std::cout << this->address << " hi ++ " << '\n';
 
         // No longer need server socket
         closesocket(ListenSocket);
@@ -99,7 +101,7 @@ namespace serverAsync
             closesocket(ClientSocket);
             WSACleanup();
 
-        std::cout << this->address << " hi ++ " << '\n';
+        
     }
 
     server::~server()
