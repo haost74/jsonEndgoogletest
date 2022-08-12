@@ -2,7 +2,13 @@ cmake_minimum_required(VERSION 3.2...3.5)
 
 project(app LANGUAGES CXX)
 
+# ----------------------------------------------------------------------
+
 find_package(Threads)
+
+# ----------------------------------------------------------------------
+
+add_subdirectory(src)
 
 # ----------------------------------------------------------------------
 
@@ -26,11 +32,12 @@ include_directories(${GOOGLETEST_INC_PATH})
 set(GOOGLETEST_INCLUDE_DIRS
 	"${CMAKE_CURRENT_SOURCE_DIR}/lib/test/googletest/googletest/include")
 
-    set(GOOGLETEST_LIBRARIES gtest)
+set(GOOGLETEST_LIBRARIES gtest)
 
 # ----------------------------------------------------------------------
 
-
 add_executable(${PROJECT_NAME} main.cpp)
-target_include_directories(${PROJECT_NAME} PRIVATE "${JSONCPP_INCLUDE_DIRS}" "${GOOGLETEST_INCLUDE_DIRS}")
-target_link_libraries(${PROJECT_NAME}  ${JSONCPP_LIBRARIES} ${GOOGLETEST_LIBRARIES} Threads::Threads)
+# target_include_directories(${PROJECT_NAME} PRIVATE "${JSONCPP_INCLUDE_DIRS}" "${GOOGLETEST_INCLUDE_DIRS}")
+# target_link_libraries(${PROJECT_NAME}  ${JSONCPP_LIBRARIES} ${GOOGLETEST_LIBRARIES} server Threads::Threads)
+
+target_link_libraries(${PROJECT_NAME} Threads::Threads server ${JSONCPP_LIBRARIES} ${GOOGLETEST_LIBRARIES})
