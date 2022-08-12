@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <thread>
 #include <json/json.h>
 #include <gtest/gtest.h>
 #include "src/server.hpp"
@@ -18,9 +19,12 @@ int main(int argc, char** argv)
     // root["indent"]["id"] = 1;
     // std::cout << root << "\n";
 
-    string address = "172.0.0.1";
-    serverAsync::server sr(std::move(address), 10);
-    
+    std::thread th([](){
+        string address = "172.0.0.1";
+        serverAsync::server sr(std::move(address), 10);
+    });
+
+    th.join();
 
     return 0;
 }
