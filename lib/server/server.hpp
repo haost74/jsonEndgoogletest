@@ -18,9 +18,18 @@
 #define DEFAULT_BUFLEN 512
 #define DEFAULT_PORT "27015"
 
+// #include <json/json.h>
+// #include <gtest/gtest.h>
+
 namespace serverAsync
 {
     using std::string;
+
+    struct IPv4
+    {
+        unsigned char b1, b2, b3, b4;
+    };
+
     class server
     {
         private:
@@ -38,6 +47,8 @@ namespace serverAsync
             int recvbuflen = DEFAULT_BUFLEN;
             struct addrinfo *result = NULL;
             struct addrinfo hints;
+
+            string getAddr();
 
         public:
             server(string&& address, string&& port);

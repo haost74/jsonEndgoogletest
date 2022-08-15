@@ -2,9 +2,32 @@
 
 namespace serverAsync
 {
+
+   string server::getAddr()
+   {
+     // Init WinSock
+        WSADATA wsa_Data;
+        int wsa_ReturnCode = WSAStartup(0x101,&wsa_Data);
+
+        // Get the local hostname
+        char szHostName[255];
+        gethostname(szHostName, 255);
+        struct hostent *host_entry;
+        host_entry=gethostbyname(szHostName);
+        char * szLocalIP;
+        szLocalIP = inet_ntoa (*(struct in_addr *)*host_entry->h_addr_list);
+        string res(szLocalIP);
+        WSACleanup();
+        return res;
+   }
+
     server::server(string&& address, string&& port) 
     : address(address), port(port) 
     {
+      auto str = getAddr();
+
+       std::cout << "start server address = " << str << " port = " << port << '\n';
+
         // Initialize Winsock
         iResult = WSAStartup(MAKEWORD(2,2), &wsaData);
         if (iResult != 0) {
@@ -58,7 +81,29 @@ namespace serverAsync
             closesocket(ListenSocket);
             WSACleanup();
         }
-        std::cout << this->address << " hi ++ " << '\n';
+
+
+        struct sockaddr_in  sockaddr;
+        int namelen = sizeof(sockaddr);
+        auto ind = getpeername( ClientSocket, (struct sockaddr *)&sockaddr, &namelen);
+        if(!ind)
+        {
+           printf("Peer Name: %s\n", inet_ntoa((in_addr)(* (in_addr*)&sockaddr.sin_addr.S_un.S_addr)));
+           printf("Peer Name: %d\n", sockaddr.sin_port);
+        }
+
+        /*
+        
+
+sockaddr_in sa = {0}; 
+socklen_t sl = sizeof(sa);
+if (getpeername(sd, (sockaddr *) &sa,  &sl))
+  perror("getpeername() failed");
+else
+  printf("peer is: %s:%hu\n", inetntoa(sa.sinaddr), ntohs(sa.sin_port));
+        
+        */
+        
 
         // No longer need server socket
         closesocket(ListenSocket);
