@@ -8,7 +8,8 @@ find_package(Threads)
 
 # ----------------------------------------------------------------------
 
-add_subdirectory(src)
+# add_subdirectory(src)
+add_subdirectory(lib/server)
 
 # ----------------------------------------------------------------------
 
@@ -40,4 +41,10 @@ add_executable(${PROJECT_NAME} main.cpp)
 # target_include_directories(${PROJECT_NAME} PRIVATE "${JSONCPP_INCLUDE_DIRS}" "${GOOGLETEST_INCLUDE_DIRS}")
 # target_link_libraries(${PROJECT_NAME}  ${JSONCPP_LIBRARIES} ${GOOGLETEST_LIBRARIES} server Threads::Threads)
 
-target_link_libraries(${PROJECT_NAME} Threads::Threads server ${JSONCPP_LIBRARIES} ${GOOGLETEST_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} 
+Threads::Threads 
+${JSONCPP_LIBRARIES} 
+${GOOGLETEST_LIBRARIES}
+server)
+
+# ${CMAKE_SOURCE_DIR}/build/src/Debug/server.lib

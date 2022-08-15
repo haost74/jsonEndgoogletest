@@ -3,7 +3,7 @@
 #include <thread>
 #include <json/json.h>
 #include <gtest/gtest.h>
-#include "src/server.hpp"
+#include "lib/server/server.hpp"
 
 using std::string;
 using std::cout;
@@ -22,7 +22,7 @@ int main(int argc, char** argv)
     // std::cout << root << "\n";
 
     std::thread th([](){
-        string address = "192.168.224.211";
+        string address = "127.0.0.1";
         serverAsync::server sr(std::move(address), "8887");
     });
 
