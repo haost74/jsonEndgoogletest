@@ -28,11 +28,8 @@ int main(int argc, char** argv)
 
 
     std::thread th([](){
-        while (1)
-        {                  
           string address = "127.0.0.1";
           serverAsync::server sr(std::move(address), "8887");
-        }
     });
 
     th.join();

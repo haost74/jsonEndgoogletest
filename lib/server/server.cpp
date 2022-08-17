@@ -74,15 +74,27 @@ namespace serverAsync
         }
 
 
-        // Accept a client socket
-        ClientSocket = accept(ListenSocket, NULL, NULL);
-        if (ClientSocket == INVALID_SOCKET) {
-            printf("accept failed with error: %d\n", WSAGetLastError());
-            closesocket(ListenSocket);
-            WSACleanup();
+        std::cout << "slepp\n";
+        while (true)
+        {                   
+        
+            // Accept a client socket
+            ClientSocket = accept(ListenSocket, NULL, NULL);
+            if (ClientSocket == INVALID_SOCKET) {
+                printf("accept failed with error: %d\n", WSAGetLastError());
+                closesocket(ListenSocket);
+                WSACleanup();
+            }
+
+            client();
         }
 
+         WSACleanup();
+        
+    }
 
+    void server::client()
+    {
         struct sockaddr_in  sockaddr;
         int namelen = sizeof(sockaddr);
         auto ind = getpeername( ClientSocket, (struct sockaddr *)&sockaddr, &namelen);
@@ -92,18 +104,23 @@ namespace serverAsync
            printf("Port Numer: %d\n", sockaddr.sin_port);
         }
 
-        // No longer need server socket
-        closesocket(ListenSocket);
+        // --- No longer need server socket
+        //closesocket(ListenSocket);
 
          // Receive until the peer shuts down the connection
         do {
 
-            std::string stre(recvbuf);
-            std::cout << "address = " <<  str << " length = " << recvbuflen << '\n';
+            
+
+            memset(recvbuf, 0, recvbuflen);
 
             iResult = recv(ClientSocket, recvbuf, recvbuflen, 0);
             if (iResult > 0) {
                 printf("Bytes received: %d\n", iResult);
+
+            std::string stre(recvbuf);
+
+            std::cout << stre << '\n';
 
             // Echo the buffer back to the sender
                 iSendResult = send( ClientSocket, recvbuf, iResult, 0 );
@@ -134,9 +151,6 @@ namespace serverAsync
 
             // cleanup
             closesocket(ClientSocket);
-            WSACleanup();
-
-        
     }
 
     server::~server()

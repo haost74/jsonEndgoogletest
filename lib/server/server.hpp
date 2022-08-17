@@ -49,6 +49,7 @@ namespace serverAsync
             struct addrinfo hints;
 
             string getAddr();
+            void client();
 
         public:
             server(string&& address, string&& port);
