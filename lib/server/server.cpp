@@ -95,9 +95,11 @@ namespace serverAsync
 
     void server::client()
     {
+        auto sk = new SOCKET(ClientSocket);
+        ClientSocket = INVALID_SOCKET;
         struct sockaddr_in  sockaddr;
         int namelen = sizeof(sockaddr);
-        auto ind = getpeername( ClientSocket, (struct sockaddr *)&sockaddr, &namelen);
+        auto ind = getpeername( *sk, (struct sockaddr *)&sockaddr, &namelen);
         if(!ind)
         {
            printf("Peer Name: %s\n", inet_ntoa((in_addr)(* (in_addr*)&sockaddr.sin_addr.S_un.S_addr)));
@@ -114,7 +116,9 @@ namespace serverAsync
 
             memset(recvbuf, 0, recvbuflen);
 
-            iResult = recv(ClientSocket, recvbuf, recvbuflen, 0);
+            
+
+            iResult = recv(*sk, recvbuf, recvbuflen, 0);
             if (iResult > 0) {
                 printf("Bytes received: %d\n", iResult);
 
@@ -123,10 +127,10 @@ namespace serverAsync
             std::cout << stre << '\n';
 
             // Echo the buffer back to the sender
-                iSendResult = send( ClientSocket, recvbuf, iResult, 0 );
+                iSendResult = send( *sk, recvbuf, iResult, 0 );
                 if (iSendResult == SOCKET_ERROR) {
                     printf("send failed with error: %d\n", WSAGetLastError());
-                    closesocket(ClientSocket);
+                    closesocket(*sk);
                     WSACleanup();
                 }
                     printf("Bytes sent: %d\n", iSendResult);
@@ -135,22 +139,23 @@ namespace serverAsync
                     printf("Connection closing...\n");
                 else  {
                     printf("recv failed with error: %d\n", WSAGetLastError());
-                    closesocket(ClientSocket);
+                    closesocket(*sk);
                     WSACleanup();
                 }
 
              } while (iResult > 0);
 
               // shutdown the connection since we're done
-            iResult = shutdown(ClientSocket, SD_SEND);
+            iResult = shutdown(*sk, SD_SEND);
             if (iResult == SOCKET_ERROR) {
                 printf("shutdown failed with error: %d\n", WSAGetLastError());
-                closesocket(ClientSocket);
+                closesocket(*sk);
                 WSACleanup();
             }
 
             // cleanup
-            closesocket(ClientSocket);
+            closesocket(*sk);
+            delete sk;
     }
 
     server::~server()
