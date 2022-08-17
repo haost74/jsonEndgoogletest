@@ -73,8 +73,6 @@ namespace serverAsync
             WSACleanup();
         }
 
-
-        std::cout << "slepp\n";
         while (true)
         {                   
         
@@ -111,13 +109,7 @@ namespace serverAsync
 
          // Receive until the peer shuts down the connection
         do {
-
-            
-
             memset(recvbuf, 0, recvbuflen);
-
-            
-
             iResult = recv(*sk, recvbuf, recvbuflen, 0);
             if (iResult > 0) {
                 printf("Bytes received: %d\n", iResult);
@@ -127,7 +119,8 @@ namespace serverAsync
             std::cout << stre << '\n';
 
             // Echo the buffer back to the sender
-                iSendResult = send( *sk, recvbuf, iResult, 0 );
+                //iSendResult = send( *sk, recvbuf, iResult, 0 );
+                iSendResult = sendall(sk, recvbuf, &iResult);
                 if (iSendResult == SOCKET_ERROR) {
                     printf("send failed with error: %d\n", WSAGetLastError());
                     closesocket(*sk);
@@ -157,6 +150,24 @@ namespace serverAsync
             closesocket(*sk);
             delete sk;
     }
+    
+       int server::sendall(SOCKET* s, char *buf, int *len)
+        {
+            int total = 0;        // how many bytes we've sent
+            int bytesleft = *len; // how many we have left to send
+            int n;
+
+            while(total < *len) {
+                n = send(*s, buf+total, bytesleft, 0);
+                if (n == -1) { break; }
+                total += n;
+                bytesleft -= n;
+            }
+
+            *len = total; // return number actually sent here
+
+            return n==-1?-1:0; // return -1 onm failure, 0 on success
+        } 
 
     server::~server()
     {

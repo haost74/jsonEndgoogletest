@@ -50,6 +50,7 @@ namespace serverAsync
 
             string getAddr();
             void client();
+            int sendall(SOCKET*, char *, int *);
 
         public:
             server(string&& address, string&& port);
