@@ -10,6 +10,7 @@ find_package(Threads)
 
 # add_subdirectory(src)
 add_subdirectory(lib/server)
+add_subdirectory(lib/task)
 
 # ----------------------------------------------------------------------
 
@@ -45,6 +46,7 @@ target_link_libraries(${PROJECT_NAME}
 Threads::Threads 
 ${JSONCPP_LIBRARIES} 
 ${GOOGLETEST_LIBRARIES}
-server)
+server
+task)
 
 # ${CMAKE_SOURCE_DIR}/build/src/Debug/server.lib

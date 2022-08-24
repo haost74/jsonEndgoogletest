@@ -1,12 +1,3 @@
-#include "task.hpp"
-
-namespace taskloop
-{
-     task::task(/* args */)
-    {
-    }
-    
-    task::~task()
-    {
-    }
-}
+#pragma once
+#include "notification_queue.hpp"
+#include "task_system.hpp"

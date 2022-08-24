@@ -5,6 +5,8 @@
 #include <gtest/gtest.h>
 #include "lib/server/server.hpp"
 
+#include "lib/task/task_system.hpp"
+
 using std::string;
 using std::cout;
 
@@ -33,6 +35,9 @@ int main(int argc, char** argv)
     });
 
     th.join();
+
+     taskloop::task_system ts;
+     ts.async_([]{std::cout << "hi" << '\n';});
 
     return 0;
 }

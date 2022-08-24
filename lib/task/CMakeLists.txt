@@ -1,0 +1,1 @@
+add_library(task task.cpp task_system.hpp notification_queue.hpp)
