@@ -84,9 +84,8 @@ namespace serverAsync
                 WSACleanup();
             }
 
-            
-
-            client();
+             taskloop::task_system ts;
+             ts.async_([this]{client();});
         }
 
          WSACleanup();

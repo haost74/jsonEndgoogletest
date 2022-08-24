@@ -19,6 +19,9 @@
 #define DEFAULT_PORT "27015"
 
 #include "client/client.hpp"
+
+#include "../task/task_system.hpp"
+
 // #include <gtest/gtest.h>
 
 namespace serverAsync
