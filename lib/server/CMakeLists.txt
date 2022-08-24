@@ -1,1 +1,1 @@
-add_library(server server.cpp server.hpp)
+add_library(server server.cpp server.hpp client/client.cpp client/client.hpp)

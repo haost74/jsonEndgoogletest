@@ -84,6 +84,8 @@ namespace serverAsync
                 WSACleanup();
             }
 
+            
+
             client();
         }
 
@@ -119,8 +121,8 @@ namespace serverAsync
             std::cout << stre << '\n';
 
             // Echo the buffer back to the sender
-                //iSendResult = send( *sk, recvbuf, iResult, 0 );
-                iSendResult = sendall(sk, recvbuf, &iResult);
+                iSendResult = send( *sk, recvbuf, iResult, 0 );
+                //iSendResult = sendall(sk, recvbuf, &iResult);
                 if (iSendResult == SOCKET_ERROR) {
                     printf("send failed with error: %d\n", WSAGetLastError());
                     closesocket(*sk);

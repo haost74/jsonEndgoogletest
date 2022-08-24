@@ -18,7 +18,7 @@
 #define DEFAULT_BUFLEN 512
 #define DEFAULT_PORT "27015"
 
-// #include <json/json.h>
+#include "client/client.hpp"
 // #include <gtest/gtest.h>
 
 namespace serverAsync
@@ -34,7 +34,7 @@ namespace serverAsync
     {
         private:
             const string address;
-            const string port;
+            const string port;            
 
             WSADATA wsaData;
             int iResult;
